@@ -1,5 +1,5 @@
 <h1 align="center">
-  #Project name
+  #Maven Archetype API template
 </h1>
 <h3 align="center">
   #Project description
@@ -53,7 +53,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ------------------------------------------------------------------------------------------------------
 <p align="center">
-  <a align="center" href="https://www.xgeeks.io/">
+  <a align="center" href="https://www.xgeeks.com/">
     <img alt="xgeeks" src="https://github.com/xgeekshq/oss-template/blob/main/.github/IMAGES/xgeeks_Logo_Black.svg" width="100">
   </a>
 </p>
