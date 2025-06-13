@@ -17,6 +17,10 @@ jobs:
     strategy:
       matrix:
         java: [ '21', '20', '17']
+        projectOptions: [
+          '-DIncludeOpenAPIGenerator=true',
+          '-DIncludeOpenAPIGenerator=false',
+        ]
     name: Java ${{ matrix.Java }} CI with Maven
     steps:
       - uses: actions/checkout@v4.1.2
@@ -43,7 +47,8 @@ jobs:
             -DgroupId=com.example.myapp \
             -DartifactId=generated-api-from-template \
             -Dversion=1.0-SNAPSHOT \
-            -DinteractiveMode=true
+            -DinteractiveMode=true \
+            ${{ matrix.projectOptions }}
       - name: Validate generated project
         working-directory: ../new-project
         run: |
