@@ -1,5 +1,5 @@
 ---
-name: Validate Java with Maven
+name: Validate Project Archetype Generation
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.release.tag_name || github.run_id }}
@@ -21,12 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '21', '20', '17']
+        java: [ '21', '17' ]
         include:
           - type: 'With OpenAPI Generator'
-            projectOptions: '-DIncludeOpenAPIGenerator=true',
+            projectOptions: '-DIncludeOpenAPIGenerator=true'
+            java: '21'
           - type: 'Without OpenAPI Generator'
-            projectOptions: '-DIncludeOpenAPIGenerator=false',
+            projectOptions: '-DIncludeOpenAPIGenerator=false'
+            java: '21'
+          - type: 'With OpenAPI Generator'
+            projectOptions: '-DIncludeOpenAPIGenerator=true'
+            java: '17'
+          - type: 'Without OpenAPI Generator'
+            projectOptions: '-DIncludeOpenAPIGenerator=false'
+            java: '17'
     name: Java ${{ matrix.java }} CI ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v4.1.2
