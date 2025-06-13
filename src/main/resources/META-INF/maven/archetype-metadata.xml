@@ -15,6 +15,18 @@
             <includes>
                 <include>**/*.java</include>
             </includes>
+            <excludes>
+                <exclude>**/greeting</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet filtered="true" packaged="false">
+            <directory>src/main</directory>
+            <includes>
+                <include>**/*.xml</include>
+            </includes>
+            <excludes>
+                <exclude>**/greeting</exclude>
+            </excludes>
         </fileSet>
         <fileSet filtered="true" packaged="false">
             <directory>src/main/resources</directory>
@@ -32,6 +44,12 @@
             <directory>src/spec/</directory>
             <includes>
                 <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="false" includeCondition="${IncludeOpenAPIGenerator}" >
+            <directory>src/test/java</directory>
+            <includes>
+                <include>**/greeting/**</include>
             </includes>
         </fileSet>
     </fileSets>
