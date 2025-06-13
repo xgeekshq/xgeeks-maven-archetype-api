@@ -28,3 +28,13 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B verify
+      - name: Generate New Project Archetype
+        run:  |
+          mvn archetype:generate \
+            -DarchetypeGroupId=com.xgeeks.template \
+            -DarchetypeArtifactId=maven-archetype-api \
+            -DarchetypeVersion=1.0-SNAPSHOT \
+            -DgroupId=com.example.myapp \
+            -DartifactId=generated-api-from-template \
+            -Dversion=1.0-SNAPSHOT \
+            -DinteractiveMode=true -X
