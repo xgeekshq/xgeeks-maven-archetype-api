@@ -1,0 +1,30 @@
+---
+name: Validate Java with Maven
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.release.tag_name || github.run_id }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ labeled, opened, synchronize, reopened ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '21', '20', '17']
+    name: Java ${{ matrix.Java }} CI with Maven
+    steps:
+      - uses: actions/checkout@v4.1.2
+      - name: Set up JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B verify
