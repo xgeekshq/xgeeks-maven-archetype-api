@@ -67,6 +67,7 @@
             <version>1.15.0</version>
             <scope>runtime</scope>
         </dependency>
+        #if($IncludeOpenAPIGenerator == "true")
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
