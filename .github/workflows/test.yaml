@@ -14,6 +14,7 @@ on:
 env:
   MAVEN_ARCHETYPE_GROUP_ID: com.xgeeks.template
   MAVEN_ARCHETYPE_ARTIFACT_ID: maven-archetype-api
+  SANDBOX_DIRECTORY: ../new-project
 
 jobs:
   build:
@@ -23,13 +24,9 @@ jobs:
         java: [ '21', '20', '17']
         include:
           - type: 'With OpenAPI Generator'
-            projectOptions: [
-              '-DIncludeOpenAPIGenerator=true',
-            ]
+            projectOptions: '-DIncludeOpenAPIGenerator=true',
           - type: 'Without OpenAPI Generator'
-            projectOptions: [
-              '-DIncludeOpenAPIGenerator=false',
-            ]
+            projectOptions: '-DIncludeOpenAPIGenerator=false',
     name: Java ${{ matrix.java }} CI ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v4.1.2
@@ -45,9 +42,9 @@ jobs:
         run: mvn -B clean install
       - name: Create a directory outside the repo
         run: |
-          mkdir -p ../new-project
+          mkdir -p ${{ env.SANDBOX_DIRECTORY }}
       - name: Generate New Project Archetype
-        working-directory: ../new-project
+        working-directory: ${{ env.SANDBOX_DIRECTORY }}
         run:  |
           mvn archetype:generate \
             -DarchetypeGroupId=${{ env.MAVEN_ARCHETYPE_GROUP_ID }} \
@@ -59,7 +56,7 @@ jobs:
             -DinteractiveMode=true \
             ${{ matrix.projectOptions }}
       - name: Validate generated project
-        working-directory: ../new-project
+        working-directory: ${{ env.SANDBOX_DIRECTORY }}
         run: |
           cd generated-api-from-template
           mvn -B verify
