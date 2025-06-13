@@ -21,12 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '21', '20', '17']
+        java: [ '21']
         include:
           - type: 'With OpenAPI Generator'
             projectOptions: '-DIncludeOpenAPIGenerator=true'
+            java: '21'
           - type: 'Without OpenAPI Generator'
             projectOptions: '-DIncludeOpenAPIGenerator=false'
+            java: '21'
     name: Java ${{ matrix.java }} CI ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v4.1.2
