@@ -11,17 +11,26 @@ on:
   pull_request:
     types: [ labeled, opened, synchronize, reopened ]
 
+env:
+  MAVEN_ARCHETYPE_GROUP_ID: com.xgeeks.template
+  MAVEN_ARCHETYPE_ARTIFACT_ID: maven-archetype-api
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         java: [ '21', '20', '17']
-        projectOptions: [
-          '-DIncludeOpenAPIGenerator=true',
-          '-DIncludeOpenAPIGenerator=false',
-        ]
-    name: Java ${{ matrix.Java }} CI with Maven
+        include:
+          - type: 'With OpenAPI Generator'
+            projectOptions: [
+              '-DIncludeOpenAPIGenerator=true',
+            ]
+          - type: 'Without OpenAPI Generator'
+            projectOptions: [
+              '-DIncludeOpenAPIGenerator=false',
+            ]
+    name: Java ${{ matrix.java }} CI ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v4.1.2
       - name: Set up JDK
@@ -41,8 +50,8 @@ jobs:
         working-directory: ../new-project
         run:  |
           mvn archetype:generate \
-            -DarchetypeGroupId=com.xgeeks.template \
-            -DarchetypeArtifactId=maven-archetype-api \
+            -DarchetypeGroupId=${{ env.MAVEN_ARCHETYPE_GROUP_ID }} \
+            -DarchetypeArtifactId=${{ env.MAVEN_ARCHETYPE_ARTIFACT_ID }} \
             -DarchetypeVersion=1.0-SNAPSHOT \
             -DgroupId=com.example.myapp \
             -DartifactId=generated-api-from-template \
