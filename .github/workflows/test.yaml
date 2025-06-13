@@ -30,7 +30,14 @@ jobs:
         run: mvn -B verify
       - name: Install new project archetype
         run: mvn -B clean install
+      - name: Current working directory
+        run: |
+          echo "Current working directory: $(pwd)"
+      - name: Create a directory outside the repo
+        run: |
+          mkdir -p ../new-project
       - name: Generate New Project Archetype
+        working-directory: ../new-project
         run:  |
           mvn archetype:generate \
             -DarchetypeGroupId=com.xgeeks.template \
