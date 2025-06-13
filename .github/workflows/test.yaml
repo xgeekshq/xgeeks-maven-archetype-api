@@ -43,8 +43,9 @@ jobs:
             -DgroupId=com.example.myapp \
             -DartifactId=generated-api-from-template \
             -Dversion=1.0-SNAPSHOT \
-            -DinteractiveMode=true -X
+            -DinteractiveMode=true
       - name: Validate generated project
+        working-directory: ../new-project
         run: |
           cd generated-api-from-template
           mvn -B verify
