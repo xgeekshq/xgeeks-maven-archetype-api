@@ -24,9 +24,9 @@ jobs:
         java: [ '21', '20', '17']
         include:
           - type: 'With OpenAPI Generator'
-            projectOptions: '-DIncludeOpenAPIGenerator=true',
+            projectOptions: '-DIncludeOpenAPIGenerator=true'
           - type: 'Without OpenAPI Generator'
-            projectOptions: '-DIncludeOpenAPIGenerator=false',
+            projectOptions: '-DIncludeOpenAPIGenerator=false'
     name: Java ${{ matrix.java }} CI ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v4.1.2
