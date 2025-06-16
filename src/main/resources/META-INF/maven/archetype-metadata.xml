@@ -10,46 +10,44 @@
         </requiredProperty>
     </requiredProperties>
     <fileSets>
+        <modules>
+            <module>spec</module>
+            <module>app</module>
+        </modules>
         <fileSet filtered="true" packaged="true">
-            <directory>src/main/java</directory>
-            <includes>
-                <include>**/*.java</include>
-            </includes>
+            <directory>app/src/main/java</directory>
             <excludes>
-                <exclude>**/greeting</exclude>
+                <exclude>**/greeting/**</exclude>
             </excludes>
         </fileSet>
-        <fileSet filtered="true" packaged="false">
-            <directory>src/main</directory>
-            <includes>
-                <include>**/*.xml</include>
-            </includes>
-            <excludes>
-                <exclude>**/greeting</exclude>
-            </excludes>
-        </fileSet>
-        <fileSet filtered="true" packaged="false">
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        <fileSet filtered="true" packaged="true">
-            <directory>src/test/java</directory>
-            <includes>
-                <include>**/*.java</include>
-            </includes>
-        </fileSet>
-        <fileSet filtered="true" packaged="false" includeCondition="${IncludeOpenAPIGenerator}" >
-            <directory>src/spec/</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        <fileSet filtered="true" packaged="false" includeCondition="${IncludeOpenAPIGenerator}" >
-            <directory>src/test/java</directory>
+        <fileSet filtered="true" packaged="true" includeCondition="${IncludeOpenAPIGenerator}">
+            <directory>app/src/main/java/</directory>
             <includes>
                 <include>**/greeting/**</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="false">
+            <directory>app</directory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="false">
+            <directory>app/src/main/resources</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+            <directory>app/src/test</directory>
+            <includes>
+                <include>**/*.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="false" includeCondition="${IncludeOpenAPIGenerator}" >
+            <directory>spec/</directory>
+            <includes>
+                <include>**/*</include>
             </includes>
         </fileSet>
     </fileSets>

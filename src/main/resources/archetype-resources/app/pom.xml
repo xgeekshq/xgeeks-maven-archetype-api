@@ -4,12 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}-main</artifactId>
+    <artifactId>${artifactId}-app</artifactId>
     <version>${version}</version>
     <packaging>jar</packaging>
-    <name>${artifactId}-main</name>
+    <name>${artifactId}-app</name>
 
     <properties>
+        <app.profiles>local</app.profiles>
         <junit.version>4.12</junit.version>
         <jib.version>3.4.5</jib.version>
         <starter-web.version>3.5.0</starter-web.version>
@@ -18,9 +19,15 @@
         <starter-security.version>3.5.0</starter-security.version>
         <starter-devtools.version>3.5.0</starter-devtools.version>
         <spring-boot-maven-plugin.version>3.5.0</spring-boot-maven-plugin.version>
+        <spring-boot-configuration-processor.version>3.5.0</spring-boot-configuration-processor.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -56,11 +63,20 @@
             <version>${starter-devtools.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.15.0</version>
-            <scope>runtime</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+            <version>${spring-boot-configuration-processor.version}</version>
         </dependency>
+        #if($IncludeOpenAPIGenerator == 'true')
+
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${artifactId}-spec</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        #end
     </dependencies>
     <build>
         <plugins>

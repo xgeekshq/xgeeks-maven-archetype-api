@@ -1,7 +1,7 @@
 package ${package}.greeting;
 
-import org.openapitools.api.GreetingApi;
-import org.openapitools.model.GetGreeting200Response;
+import ${package}.api.GreetingApi;
+import ${package}.model.GetGreeting200Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
