@@ -1,4 +1,4 @@
-# Contributing to xgeeks - #Project name
+# Contributing to xgeeks - #Maven Archetype API template
 
 🎉🚀🙌🏻 First off, thanks for taking the time to contribute! 🙌🏻🚀🎉
 
